@@ -57,4 +57,4 @@ RUN bin/bash -c "cd /tmp && \
 		rm -rf /tmp/opencv-2.4.11 && \
 		rm -f /tmp/2.4.11.zip"
 
-CMD /bin/bash -c "export ROS_HOSTNAME=192.168.99.100 && source ~/catkin_ws/devel/setup.bash && roslaunch neato_node bringup.launch host:=$HOST"
+CMD /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roslaunch neato_node bringup.launch host:=$HOST"
