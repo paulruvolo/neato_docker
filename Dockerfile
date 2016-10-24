@@ -16,11 +16,13 @@ RUN apt-get update && apt-get install -y \
     python-pip \ 
     vim && \
     setcap cap_net_raw+ep /usr/sbin/hping3 && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN add-apt-repository -y ppa:ddalex/gstreamer
 RUN apt-get update && apt-get install -y gstreamer1.0* ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-turtlebot-interactions ros-indigo-turtlebot-simulator ros-indigo-kobuki-ftdi ros-indigo-rocon-remocon ros-indigo-rocon-qt-library ros-indigo-ar-track-alvar-msgs && \
-	rm -rf /var/lib/apt/lists/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Setup catkin workspace and ROS environment.
 RUN /bin/bash -c "source /opt/ros/indigo/setup.bash && \
