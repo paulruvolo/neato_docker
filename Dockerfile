@@ -33,7 +33,6 @@ RUN /bin/bash -c "source /opt/ros/indigo/setup.bash && \
                   catkin_init_workspace && \
                   cd ~/catkin_ws/ && \
                   catkin_make && \
-                  echo 'export ROS_HOSTNAME=192.168.99.100' >> ~/.bashrc && \
                   echo 'source ~/catkin_ws/devel/setup.bash' >> ~/.bashrc"
 
 # build a custom version of opencv
