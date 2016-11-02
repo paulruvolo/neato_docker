@@ -27,17 +27,6 @@ RUN apt-get update && apt-get install -y gstreamer1.0* ros-indigo-turtlebot ros-
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# setup vnc to start run:
-# x11vnc -forever -usepw -create
-RUN /bin/bash -c "mkdir ~/.vnc && \
-		  x11vnc -storepasswd 1234 ~/.vnc/passwd"
-
-RUN /bin/bash -c "echo \"\"#\!/bin/sh\"\" > ~/.xsession && \
-		  echo \"fvwm &\" >> ~/.xsession && \
-		  echo \"sleep 2\" >> ~/.xsession && \
-		  echo \"xterm &\" >> ~/.xsession && \
-		  chmod u+x ~/.xsession"
-
 # Setup catkin workspace and ROS environment.
 RUN /bin/bash -c "source /opt/ros/indigo/setup.bash && \
                   mkdir -p ~/catkin_ws/src && \
@@ -69,5 +58,17 @@ RUN bin/bash -c "cd /tmp && \
 		make install && \
 		rm -rf /tmp/opencv-2.4.11 && \
 		rm -f /tmp/2.4.11.zip"
+
+
+# setup x11vnc
+# To start the x11vnc server use: docker exec container_name -it x11vnc -forever -usepw -create
+RUN /bin/bash -c "mkdir ~/.vnc && \
+		  x11vnc -storepasswd 1234 ~/.vnc/passwd"
+
+RUN /bin/bash -c "echo \"\"#\!/bin/sh\"\" > ~/.xsession && \
+		  echo \"fvwm &\" >> ~/.xsession && \
+		  echo \"sleep 2\" >> ~/.xsession && \
+		  echo \"xterm &\" >> ~/.xsession && \
+		  chmod u+x ~/.xsession"
 
 CMD /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roslaunch neato_node bringup.launch host:=$HOST"
