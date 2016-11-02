@@ -32,6 +32,12 @@ RUN apt-get update && apt-get install -y gstreamer1.0* ros-indigo-turtlebot ros-
 RUN /bin/bash -c "mkdir ~/.vnc && \
 		  x11vnc -storepasswd 1234 ~/.vnc/passwd"
 
+RUN /bin/bash -c "echo \"\"#\!/bin/sh\"\" > ~/.xsession && \
+		  echo \"fvwm &\" >> ~/.xsession && \
+		  echo \"sleep 2\" >> ~/.xsession && \
+		  echo \"xterm &\" >> ~/.xsession && \
+		  chmod u+x ~/.xsession"
+
 # Setup catkin workspace and ROS environment.
 RUN /bin/bash -c "source /opt/ros/indigo/setup.bash && \
                   mkdir -p ~/catkin_ws/src && \
