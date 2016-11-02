@@ -12,6 +12,9 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \ 
     hping3 \
+    x11vnc \
+    xvfb \
+    fvwm \
     tcpdump \
     python-pip \ 
     vim && \
@@ -23,6 +26,10 @@ RUN add-apt-repository -y ppa:ddalex/gstreamer
 RUN apt-get update && apt-get install -y gstreamer1.0* ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-turtlebot-interactions ros-indigo-turtlebot-simulator ros-indigo-kobuki-ftdi ros-indigo-rocon-remocon ros-indigo-rocon-qt-library ros-indigo-ar-track-alvar-msgs && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# setup vnc
+RUN /bin/bash -c "mkdir ~/.vnc && \
+		  x11vnc -storepasswd 1234 ~/.vnc/passwd"
 
 # Setup catkin workspace and ROS environment.
 RUN /bin/bash -c "source /opt/ros/indigo/setup.bash && \
