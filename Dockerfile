@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y gstreamer1.0* ros-indigo-turtlebot ros-
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# setup vnc
+# setup vnc to start run:
+# x11vnc -forever -usepw -create
 RUN /bin/bash -c "mkdir ~/.vnc && \
 		  x11vnc -storepasswd 1234 ~/.vnc/passwd"
 
