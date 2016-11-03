@@ -60,11 +60,15 @@ RUN bin/bash -c "cd /tmp && \
 		rm -f /tmp/2.4.11.zip"
 
 
-# setup files required for x11vnc
-# To start the x11vnc server use: docker exec container_name -it x11vnc -forever -usepw -create
 COPY xsession /root/.xsession
+
+# setup files required for x11vnc
+# To start the x11vnc server use: docker exec container_name x11vnc -forever -usepw -create
 RUN /bin/bash -c "mkdir ~/.vnc && \
+		  mkdir ~/.rviz && \
 		  x11vnc -storepasswd 1234 ~/.vnc/passwd && \
 		  chmod u+x ~/.xsession"
+
+COPY default.rviz /root/.rviz
 
 CMD /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roslaunch neato_node bringup.launch host:=$HOST"
