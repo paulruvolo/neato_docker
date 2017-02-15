@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
     xvfb \
     fvwm \
     tcpdump \
+    net-tools \
+    iputils-ping \
     python-pip \
     libgstreamer1.0-dev \
     libgstreamer-plugins-* \
@@ -36,7 +38,7 @@ RUN apt-get update && apt-get install -y \
 RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash && \
                   mkdir -p ~/catkin_ws/src && \
                   cd ~/catkin_ws/src && \
-		  git clone https://github.com/paulruvolo/comprobo17.git && \
+		  git clone -b qea https://github.com/paulruvolo/comprobo17.git && \
 		  git clone https://github.com/ros-teleop/teleop_twist_keyboard.git && \
                   catkin_init_workspace && \
                   cd ~/catkin_ws/ && \
