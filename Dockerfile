@@ -56,4 +56,4 @@ RUN /bin/bash -c "mkdir ~/.vnc && \
 
 COPY default.rviz /root/.rviz
 
-CMD /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roslaunch neato_node bringup.launch host:=$HOST"
+CMD /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roslaunch neato_node bringup.launch host:=$HOST" use_udp:=false
