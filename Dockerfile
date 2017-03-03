@@ -4,6 +4,7 @@ FROM ros:kinetic-perception
 MAINTAINER Paul Ruvolo Paul.Ruvolo@olin.edu
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV ROS_HOSTNAME=10.0.75.2
 
 # install ros packages
 RUN apt-get update && apt-get install -y \
