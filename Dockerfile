@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     iputils-ping \
     python-pip \
-    vim && \
+    vim \
+    xpra && \
     setcap cap_net_raw+ep /usr/sbin/hping3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -58,5 +59,4 @@ RUN /bin/bash -c "mkdir ~/.vnc && \
 
 COPY default.rviz ~ros/.rviz
 
-CMD /bin/bash -c "x11vnc -forever -usepw -create & (source ~/catkin_ws/devel/setup.bash && roslaunch neato_simulator neato_playground.launch)"
-#CMD /bin/bash -c "source ~/catkin_ws/devel/setup.bash && roslaunch neato_node bringup_minimal.launch host:=$HOST use_udp:=false"
+CMD /bin/bash -c "(sleep 10; xpra start --start=gzclient --bind-tcp=0.0.0.0:14500) & (source ~/catkin_ws/devel/setup.bash && roslaunch neato_simulator neato_playground.launch)"
