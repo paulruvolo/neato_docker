@@ -6,18 +6,10 @@ MAINTAINER Paul Ruvolo Paul.Ruvolo@olin.edu
 ENV DEBIAN_FRONTEND=noninteractive
 ENV ROS_HOSTNAME=10.0.75.2
 
-
-#generic xforwarding instructions (can embed in dockerfile probably)
-#docker run -ti --rm \
-#       -e DISPLAY=$DISPLAY \
-#       -v /tmp/.X11-unix:/tmp/.X11-unix \
-#       firefox
-#RUN useradd -ms /bin/bash ros
-#USER ros
-
 # install ros packages
 RUN apt-get update && apt-get install -y \
     software-properties-common \
+    ros-melodic-pointcloud-to-laserscan \
     wget \
     unzip \ 
     hping3 \
